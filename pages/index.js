@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import MenuHeader from '../components/MenuHeader';
 import MainCategoryNav from '../components/MainCategoryNav';
@@ -12,6 +12,7 @@ export default function Menu() {
   const [isLoading, setIsLoading] = useState(true);
   const [menuData, setMenuData] = useState(null);
   const [error, setError] = useState(null);
+  const sectionRefs = useRef({});
 
   useEffect(() => {
     const loadMenuData = async () => {
@@ -50,12 +51,20 @@ export default function Menu() {
 
   const handleSubcategoryChange = (subcategoryId) => {
     setActiveSubcategory(subcategoryId);
+    // Scroll to the subcategory section
+    const element = sectionRefs.current[subcategoryId];
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start',
+        inline: 'nearest'
+      });
+    }
   };
 
   // Get current main category and its subcategories
   const currentMainCategory = menuData?.mainCategories.find(cat => cat.id === activeMainCategory);
   const currentSubcategories = currentMainCategory?.subcategories || [];
-  const currentSubcategory = currentSubcategories.find(sub => sub.id === activeSubcategory);
 
   if (isLoading) {
     return (
@@ -114,7 +123,7 @@ export default function Menu() {
           onMainCategoryChange={handleMainCategoryChange}
         />
         
-        {/* Subcategory Slider */}
+        {/* Subcategory Slider - Quick Navigation */}
         <SubcategorySlider
           subcategories={currentSubcategories}
           activeSubcategory={activeSubcategory}
@@ -125,23 +134,39 @@ export default function Menu() {
         <div className="bg-menu-gray-100 px-4 py-2 border-b border-menu-gray-200">
           <div className="flex items-center space-x-2 text-sm text-menu-gray-600">
             <span className="font-medium">{currentMainCategory?.name}</span>
-            {currentSubcategory && (
-              <>
-                <span>›</span>
-                <span>{currentSubcategory.name}</span>
-              </>
-            )}
+            <span>› All Categories</span>
           </div>
         </div>
         
-        {/* Menu Items */}
+        {/* All Subcategories Display */}
         <main className="pb-8">
-          {currentSubcategory && (
-            <MenuCategory
-              key={currentSubcategory.id}
-              category={currentSubcategory}
-              isVisible={true}
-            />
+          {currentSubcategories.map((subcategory, index) => (
+            <div key={subcategory.id}>
+              {/* Subcategory Section Header */}
+              <div 
+                ref={el => sectionRefs.current[subcategory.id] = el}
+                className="bg-white border-b border-menu-gray-200 px-4 py-3 sticky top-0 z-5"
+              >
+                <h2 className="text-lg font-semibold text-menu-gray-900 flex items-center space-x-2">
+                  <span className="text-menu-accent-500">#{index + 1}</span>
+                  <span>{subcategory.name}</span>
+                </h2>
+                <p className="text-sm text-menu-gray-600 mt-1">{subcategory.description}</p>
+              </div>
+              
+              {/* Subcategory Items */}
+              <MenuCategory
+                category={subcategory}
+                isVisible={true}
+                showTitle={false} // We're showing our own title above
+              />
+            </div>
+          ))}
+          
+          {currentSubcategories.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-menu-gray-600">No items available in this category</p>
+            </div>
           )}
         </main>
         

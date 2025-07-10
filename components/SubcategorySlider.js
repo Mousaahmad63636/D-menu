@@ -58,7 +58,12 @@ const SubcategorySlider = ({ subcategories, activeSubcategory, onSubcategoryChan
 
   return (
     <nav className="bg-white sticky top-0 z-10 shadow-sm border-b border-menu-gray-200">
-      <div className="relative px-4 py-3">
+      {/* Quick Navigation Label */}
+      <div className="px-4 pt-2 pb-1">
+        <p className="text-xs text-menu-gray-500 font-medium">Quick Navigation</p>
+      </div>
+      
+      <div className="relative px-4 pb-3">
         {/* Left Arrow */}
         {canScrollLeft && (
           <button
@@ -119,14 +124,18 @@ const SubcategorySlider = ({ subcategories, activeSubcategory, onSubcategoryChan
               key={subcategory.id}
               onClick={() => onSubcategoryChange(subcategory.id)}
               onKeyDown={(e) => handleKeyDown(e, subcategory.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-menu-accent-500 focus:ring-offset-2 ${
+              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-menu-accent-500 focus:ring-offset-2 border ${
                 activeSubcategory === subcategory.id
-                  ? 'bg-menu-accent-500 text-white shadow-sm'
-                  : 'bg-menu-gray-100 text-menu-gray-600 hover:bg-menu-gray-200'
+                  ? 'bg-menu-accent-500 text-white shadow-sm border-menu-accent-500'
+                  : 'bg-menu-gray-50 text-menu-gray-700 hover:bg-menu-accent-50 hover:text-menu-accent-700 hover:border-menu-accent-200 border-menu-gray-200'
               }`}
               aria-current={activeSubcategory === subcategory.id ? 'page' : undefined}
+              title={`Jump to ${subcategory.name} section`}
             >
-              {subcategory.name}
+              <span className="flex items-center space-x-1">
+                <span>📍</span>
+                <span>{subcategory.name}</span>
+              </span>
             </button>
           ))}
         </div>
