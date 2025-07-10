@@ -1,9 +1,10 @@
 import '../styles/globals.css';
 import Head from 'next/head';
+import { SessionProvider } from 'next-auth/react';
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
-    <>
+    <SessionProvider session={session}>
       <Head>
         <title>Bella Vista Restaurant - Menu</title>
         <meta name="description" content="Fresh, locally-sourced ingredients crafted into memorable dining experiences" />
@@ -11,6 +12,6 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />
-    </>
+    </SessionProvider>
   );
 }
