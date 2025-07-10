@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]';
 import { fetchSheetData, updateMenuItem, deleteMenuItem } from '../../../services/googleSheetsService';
 import { fetchCsvData, updateCsvMenuItem, deleteCsvMenuItem } from '../../../services/csvService';
+import { fetchMemoryData, updateMemoryMenuItem, deleteMemoryMenuItem } from '../../../services/memoryStoreService';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
@@ -15,13 +16,18 @@ export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
       try {
-        // Try Google Sheets first, fallback to CSV
+        // Try Google Sheets first, then CSV, finally memory store
         let allItems;
         try {
           allItems = await fetchSheetData();
         } catch (sheetsError) {
-          console.log('Google Sheets failed, using CSV fallback:', sheetsError.message);
-          allItems = await fetchCsvData();
+          console.log('Google Sheets failed, trying CSV fallback:', sheetsError.message);
+          try {
+            allItems = await fetchCsvData();
+          } catch (csvError) {
+            console.log('CSV failed, using memory store:', csvError.message);
+            allItems = await fetchMemoryData();
+          }
         }
         
         const item = allItems.find(item => item.id === id);
@@ -39,7 +45,7 @@ export default async function handler(req, res) {
       
     case 'PUT':
       try {
-        // Try Google Sheets first, fallback to CSV
+        // Try Google Sheets first, then CSV, finally memory store
         let result;
         try {
           const allItems = await fetchSheetData();
@@ -54,8 +60,13 @@ export default async function handler(req, res) {
           
           result = await updateMenuItem(rowIndex, req.body);
         } catch (sheetsError) {
-          console.log('Google Sheets failed, using CSV fallback:', sheetsError.message);
-          result = await updateCsvMenuItem(id, req.body);
+          console.log('Google Sheets failed, trying CSV fallback:', sheetsError.message);
+          try {
+            result = await updateCsvMenuItem(id, req.body);
+          } catch (csvError) {
+            console.log('CSV failed, using memory store:', csvError.message);
+            result = await updateMemoryMenuItem(id, req.body);
+          }
         }
         
         res.status(200).json({ success: true, ...result });
@@ -67,7 +78,7 @@ export default async function handler(req, res) {
       
     case 'DELETE':
       try {
-        // Try Google Sheets first, fallback to CSV
+        // Try Google Sheets first, then CSV, finally memory store
         let result;
         try {
           const allItems = await fetchSheetData();
@@ -82,8 +93,13 @@ export default async function handler(req, res) {
           
           result = await deleteMenuItem(rowIndex);
         } catch (sheetsError) {
-          console.log('Google Sheets failed, using CSV fallback:', sheetsError.message);
-          result = await deleteCsvMenuItem(id);
+          console.log('Google Sheets failed, trying CSV fallback:', sheetsError.message);
+          try {
+            result = await deleteCsvMenuItem(id);
+          } catch (csvError) {
+            console.log('CSV failed, using memory store:', csvError.message);
+            result = await deleteMemoryMenuItem(id);
+          }
         }
         
         res.status(200).json({ success: true, ...result });
