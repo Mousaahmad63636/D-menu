@@ -31,6 +31,43 @@ const MainCategoryNav = ({ mainCategories, activeMainCategory, onMainCategoryCha
     return colorMap[categoryId] || colorMap['food'];
   };
 
+  // Professional SVG icons for each category
+  const getCategoryIcon = (categoryId, className) => {
+    const iconMap = {
+      'food': (
+        // Chef's hat icon
+        <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18h12V8.5a2.5 2.5 0 00-2.5-2.5h-7A2.5 2.5 0 006 8.5V18z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18h12l1 2H5l1-2zM8 12h8M9 15h6" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 6c0-1.1.9-2 2-2s2 .9 2 2M12 6c0-1.1.9-2 2-2s2 .9 2 2M14 6c0-1.1.9-2 2-2s2 .9 2 2" />
+        </svg>
+      ),
+      'beverages': (
+        // Wine glass icon
+        <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 12V7a1 1 0 011-1h12a1 1 0 011 1v5M5 12l2 7h10l2-7M5 12h14" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V2M9 2h6" />
+        </svg>
+      ),
+      'desserts': (
+        // Layered cake icon
+        <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M20 13v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l1.5 3h3l-2.5 2 1 3-3-2-3 2 1-3-2.5-2h3L12 3z" />
+        </svg>
+      ),
+      'tobacco': (
+        // Professional cigar icon
+        <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20M6 8h12a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4a2 2 0 012-2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M18 8v8M21 10v4" />
+        </svg>
+      )
+    };
+    return iconMap[categoryId] || iconMap['food'];
+  };
+
   return (
     <nav className="bg-white shadow-lg border-b border-gray-200">
       <div className="px-3 py-4">
@@ -51,8 +88,8 @@ const MainCategoryNav = ({ mainCategories, activeMainCategory, onMainCategoryCha
                 }`}
                 aria-current={isActive ? 'page' : undefined}
               >
-                <div className="flex flex-col items-center space-y-0.5">
-                  <span className="text-base">{category.icon}</span>
+                <div className="flex flex-col items-center space-y-1">
+                  {getCategoryIcon(category.id, "w-5 h-5 stroke-current")}
                   <span className="text-xs font-medium">{category.name}</span>
                 </div>
               </button>

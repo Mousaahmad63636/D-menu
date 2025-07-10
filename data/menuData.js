@@ -9,7 +9,6 @@ export const menuData = {
       id: "food",
       name: "Food",
       description: "Delicious meals and appetizers",
-      icon: "🍽️",
       subcategories: [
         {
           id: "appetizers",
@@ -128,7 +127,6 @@ export const menuData = {
       id: "beverages",
       name: "Beverages",
       description: "Refreshing drinks to complement your meal",
-      icon: "🥤",
       subcategories: [
         {
           id: "hot-drinks",
@@ -197,7 +195,6 @@ export const menuData = {
       id: "desserts",
       name: "Desserts",
       description: "Sweet endings to your dining experience",
-      icon: "🍰",
       subcategories: [
         {
           id: "cakes",
@@ -251,7 +248,6 @@ export const menuData = {
       id: "tobacco",
       name: "Tobacco",
       description: "Premium tobacco products",
-      icon: "🚬",
       subcategories: [
         {
           id: "cigarettes",
