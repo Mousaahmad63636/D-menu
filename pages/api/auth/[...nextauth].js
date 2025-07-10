@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-export default NextAuth({
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -10,12 +10,21 @@ export default NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        // Verify against environment variables
-        if (credentials.username === process.env.ADMIN_USERNAME && 
-            credentials.password === process.env.ADMIN_PASSWORD) {
-          return { id: 1, name: "Admin" };
+        try {
+          // Verify against environment variables
+          if (credentials?.username === process.env.ADMIN_USERNAME && 
+              credentials?.password === process.env.ADMIN_PASSWORD) {
+            return { 
+              id: "1", 
+              name: "Admin",
+              email: "admin@localhost"
+            };
+          }
+          return null;
+        } catch (error) {
+          console.error('NextAuth authorize error:', error);
+          return null;
         }
-        return null;
       }
     })
   ],
@@ -31,15 +40,22 @@ export default NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.name = user.name;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id;
+        session.user.name = token.name;
       }
       return session;
     }
   },
   secret: process.env.NEXTAUTH_SECRET,
-});
+  debug: process.env.NODE_ENV === 'development',
+};
+
+const handler = NextAuth(authOptions);
+
+export default handler;
