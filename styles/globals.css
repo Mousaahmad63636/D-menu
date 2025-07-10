@@ -51,6 +51,25 @@
     @apply text-lg font-semibold text-menu-gray-900;
   }
   
+  /* Navigation Arrow Animations */
+  .nav-arrow {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .nav-arrow:hover {
+    @apply scale-110 shadow-md;
+  }
+  
+  .nav-arrow:active {
+    @apply scale-95;
+  }
+  
+  /* Smooth scroll animations */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
   /* Mobile-specific touch improvements */
   button, a {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
@@ -61,10 +80,36 @@
     outline: 2px solid #3b82f6;
     outline-offset: 2px;
   }
+  
+  /* Category button hover effects */
+  .category-button {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .category-button:hover {
+    @apply transform scale-102;
+  }
+  
+  /* Main category button animations */
+  .main-category-button {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .main-category-button:hover {
+    @apply transform scale-102;
+  }
+  
+  .main-category-button.active {
+    @apply transform scale-105;
+  }
 }
 
 @layer utilities {
   .touch-manipulation {
     touch-action: manipulation;
+  }
+  
+  .scale-102 {
+    transform: scale(1.02);
   }
 }

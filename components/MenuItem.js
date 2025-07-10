@@ -15,6 +15,19 @@ const MenuItem = ({ item }) => {
     return dietary.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
   };
 
+  // Build dietary array from various sources
+  const buildDietaryInfo = () => {
+    const dietaryInfo = [...(item.dietary || [])];
+    
+    if (item.isVegetarian) {
+      dietaryInfo.push('vegetarian');
+    }
+    
+    return [...new Set(dietaryInfo)]; // Remove duplicates
+  };
+
+  const dietaryInfo = buildDietaryInfo();
+
   return (
     <div className="bg-white border-b border-menu-gray-200 p-4 relative">
       <div className="flex items-start space-x-3">
@@ -24,6 +37,9 @@ const MenuItem = ({ item }) => {
             alt={item.name}
             className="w-16 h-16 rounded-lg object-cover"
             loading="lazy"
+            onError={(e) => {
+              e.target.src = 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop';
+            }}
           />
           {item.popular && (
             <div className="absolute -top-1 -right-1 bg-menu-accent-500 text-white px-1.5 py-0.5 rounded-full text-xs font-medium">
@@ -42,20 +58,36 @@ const MenuItem = ({ item }) => {
             </span>
           </div>
           
-          <p className="text-sm text-menu-gray-600 leading-relaxed mb-2 line-clamp-2">
+          <p className="text-sm text-menu-gray-600 leading-relaxed mb-1 line-clamp-2">
             {item.description}
           </p>
-          
-          {item.dietary && item.dietary.length > 0 && (
-            <div className="flex flex-wrap gap-1">
-              {item.dietary.map((diet) => (
-                <span
-                  key={diet}
-                  className={`px-2 py-0.5 rounded-full text-xs font-medium ${getDietaryBadgeColor(diet)}`}
-                >
-                  {formatDietary(diet)}
-                </span>
-              ))}
+
+          {item.description2 && (
+            <p className="text-xs text-menu-gray-500 leading-relaxed mb-2 line-clamp-1">
+              {item.description2}
+            </p>
+          )}
+
+          <div className="flex flex-wrap items-center gap-1 mb-2">
+            {item.prepTime && (
+              <span className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">
+                🕒 {item.prepTime}
+              </span>
+            )}
+            
+            {dietaryInfo.length > 0 && dietaryInfo.map((diet) => (
+              <span
+                key={diet}
+                className={`px-2 py-0.5 rounded-full text-xs font-medium ${getDietaryBadgeColor(diet)}`}
+              >
+                {formatDietary(diet)}
+              </span>
+            ))}
+          </div>
+
+          {item.allergens && item.allergens.length > 0 && (
+            <div className="text-xs text-red-600">
+              <span className="font-medium">Allergens:</span> {item.allergens.join(', ')}
             </div>
           )}
         </div>

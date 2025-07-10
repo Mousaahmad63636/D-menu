@@ -1,24 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import MenuHeader from '../components/MenuHeader';
-import MenuSection from '../components/MenuSection';
-import MenuNav from '../components/MenuNav';
+import MainCategoryNav from '../components/MainCategoryNav';
+import SubcategorySlider from '../components/SubcategorySlider';
 import MenuCategory from '../components/MenuCategory';
-import { menuData } from '../data/menuData';
+import { fetchMenuData } from '../services/menuService';
 
 export default function Menu() {
-  const [activeCategory, setActiveCategory] = useState('appetizers');
+  const [activeMainCategory, setActiveMainCategory] = useState('');
+  const [activeSubcategory, setActiveSubcategory] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [menuData, setMenuData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Simulate loading state
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
+    const loadMenuData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const data = await fetchMenuData();
+        setMenuData(data);
+        // Set the first main category and its first subcategory as active by default
+        if (data.mainCategories && data.mainCategories.length > 0) {
+          const firstMainCategory = data.mainCategories[0];
+          setActiveMainCategory(firstMainCategory.id);
+          if (firstMainCategory.subcategories && firstMainCategory.subcategories.length > 0) {
+            setActiveSubcategory(firstMainCategory.subcategories[0].id);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load menu data:', err);
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadMenuData();
   }, []);
 
-  const handleCategoryChange = (categoryId) => {
-    setActiveCategory(categoryId);
+  const handleMainCategoryChange = (mainCategoryId) => {
+    setActiveMainCategory(mainCategoryId);
+    // Automatically select the first subcategory of the new main category
+    const mainCategory = menuData.mainCategories.find(cat => cat.id === mainCategoryId);
+    if (mainCategory && mainCategory.subcategories && mainCategory.subcategories.length > 0) {
+      setActiveSubcategory(mainCategory.subcategories[0].id);
+    }
   };
+
+  const handleSubcategoryChange = (subcategoryId) => {
+    setActiveSubcategory(subcategoryId);
+  };
+
+  // Get current main category and its subcategories
+  const currentMainCategory = menuData?.mainCategories.find(cat => cat.id === activeMainCategory);
+  const currentSubcategories = currentMainCategory?.subcategories || [];
+  const currentSubcategory = currentSubcategories.find(sub => sub.id === activeSubcategory);
 
   if (isLoading) {
     return (
@@ -26,6 +63,34 @@ export default function Menu() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-menu-accent-500 mx-auto mb-4"></div>
           <p className="text-menu-gray-600">Loading menu...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-menu-gray-50 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto p-6">
+          <div className="text-red-500 text-6xl mb-4">⚠️</div>
+          <h2 className="text-2xl font-bold text-menu-gray-800 mb-2">Unable to Load Menu</h2>
+          <p className="text-menu-gray-600 mb-4">{error}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="bg-menu-accent-500 text-white px-6 py-2 rounded-lg hover:bg-menu-accent-600 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!menuData) {
+    return (
+      <div className="min-h-screen bg-menu-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-menu-gray-600">No menu data available</p>
         </div>
       </div>
     );
@@ -42,26 +107,42 @@ export default function Menu() {
       <div className="min-h-screen bg-menu-gray-50">
         <MenuHeader restaurant={menuData.restaurant} />
         
-        <MenuSection
-          categories={menuData.categories}
-          activeCategory={activeCategory}
-          onCategoryChange={handleCategoryChange}
+        {/* Main Category Navigation */}
+        <MainCategoryNav
+          mainCategories={menuData.mainCategories}
+          activeMainCategory={activeMainCategory}
+          onMainCategoryChange={handleMainCategoryChange}
         />
         
-        <MenuNav
-          categories={menuData.categories}
-          activeCategory={activeCategory}
-          onCategoryChange={handleCategoryChange}
+        {/* Subcategory Slider */}
+        <SubcategorySlider
+          subcategories={currentSubcategories}
+          activeSubcategory={activeSubcategory}
+          onSubcategoryChange={handleSubcategoryChange}
         />
         
+        {/* Current Category Breadcrumb */}
+        <div className="bg-menu-gray-100 px-4 py-2 border-b border-menu-gray-200">
+          <div className="flex items-center space-x-2 text-sm text-menu-gray-600">
+            <span className="font-medium">{currentMainCategory?.name}</span>
+            {currentSubcategory && (
+              <>
+                <span>›</span>
+                <span>{currentSubcategory.name}</span>
+              </>
+            )}
+          </div>
+        </div>
+        
+        {/* Menu Items */}
         <main className="pb-8">
-          {menuData.categories.map((category) => (
+          {currentSubcategory && (
             <MenuCategory
-              key={category.id}
-              category={category}
-              isVisible={activeCategory === category.id}
+              key={currentSubcategory.id}
+              category={currentSubcategory}
+              isVisible={true}
             />
-          ))}
+          )}
         </main>
         
         <footer className="bg-white border-t border-menu-gray-200 p-4">
