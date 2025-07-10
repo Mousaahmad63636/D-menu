@@ -58,12 +58,7 @@ const SubcategorySlider = ({ subcategories, activeSubcategory, onSubcategoryChan
 
   return (
     <nav className="bg-white sticky top-0 z-10 shadow-sm border-b border-menu-gray-200">
-      {/* Quick Navigation Label */}
-      <div className="px-4 pt-2 pb-1">
-        <p className="text-xs text-menu-gray-500 font-medium">Quick Navigation</p>
-      </div>
-      
-      <div className="relative px-4 pb-3">
+      <div className="relative px-4 py-3">
         {/* Left Arrow */}
         {canScrollLeft && (
           <button
@@ -132,10 +127,7 @@ const SubcategorySlider = ({ subcategories, activeSubcategory, onSubcategoryChan
               aria-current={activeSubcategory === subcategory.id ? 'page' : undefined}
               title={`Jump to ${subcategory.name} section`}
             >
-              <span className="flex items-center space-x-1">
-                <span>📍</span>
-                <span>{subcategory.name}</span>
-              </span>
+              {subcategory.name}
             </button>
           ))}
         </div>

@@ -123,20 +123,12 @@ export default function Menu() {
           onMainCategoryChange={handleMainCategoryChange}
         />
         
-        {/* Subcategory Slider - Quick Navigation */}
+        {/* Subcategory Slider */}
         <SubcategorySlider
           subcategories={currentSubcategories}
           activeSubcategory={activeSubcategory}
           onSubcategoryChange={handleSubcategoryChange}
         />
-        
-        {/* Current Category Breadcrumb */}
-        <div className="bg-menu-gray-100 px-4 py-2 border-b border-menu-gray-200">
-          <div className="flex items-center space-x-2 text-sm text-menu-gray-600">
-            <span className="font-medium">{currentMainCategory?.name}</span>
-            <span>› All Categories</span>
-          </div>
-        </div>
         
         {/* All Subcategories Display */}
         <main className="pb-8">
