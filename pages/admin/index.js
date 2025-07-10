@@ -4,33 +4,38 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { getSession } from 'next-auth/react';
 import AdminLayout from '../../components/admin/Layout';
-import { fetchMenuItems, getCategories } from '../../lib/google-sheets';
 
-export default function AdminDashboard({ initialItems, initialCategories }) {
-  const [menuItems, setMenuItems] = useState(initialItems || []);
-  const [categories, setCategories] = useState(initialCategories || []);
-  const [isLoading, setIsLoading] = useState(!initialItems);
+export default function AdminDashboard() {
+  const [menuItems, setMenuItems] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    if (!initialItems) {
-      const loadData = async () => {
-        try {
-          setIsLoading(true);
-          const items = await fetchMenuItems();
-          const cats = await getCategories();
-          setMenuItems(items);
-          setCategories(cats);
-        } catch (error) {
-          console.error('Error loading dashboard data:', error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
+        // Fetch data from API routes instead of direct imports
+        const itemsResponse = await fetch('/api/menu-items');
+        const items = await itemsResponse.json();
+        
+        // Extract unique categories from items
+        const uniqueCategories = [...new Set(items.map(item => item.category))];
+        
+        setMenuItems(items);
+        setCategories(uniqueCategories);
+      } catch (error) {
+        console.error('Error loading dashboard data:', error);
+        // Set empty arrays on error to prevent crashes
+        setMenuItems([]);
+        setCategories([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-      loadData();
-    }
-  }, [initialItems]);
+    loadData();
+  }, []);
 
   if (isLoading) {
     return (
@@ -132,42 +137,4 @@ export default function AdminDashboard({ initialItems, initialCategories }) {
       </div>
     </AdminLayout>
   );
-}
-
-// Server-side props to check authentication and pre-fetch data
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-
-  // Redirect if not authenticated
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/login?callbackUrl=/admin',
-        permanent: false,
-      },
-    };
-  }
-
-  // Pre-fetch data for the dashboard
-  try {
-    const initialItems = await fetchMenuItems();
-    const initialCategories = await getCategories();
-
-    return {
-      props: {
-        session,
-        initialItems,
-        initialCategories,
-      },
-    };
-  } catch (error) {
-    console.error('Error pre-fetching dashboard data:', error);
-    return {
-      props: {
-        session,
-        initialItems: null,
-        initialCategories: null,
-      },
-    };
-  }
 }
