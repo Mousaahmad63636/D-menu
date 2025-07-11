@@ -1,11 +1,18 @@
 // Firestore service - server-side only
 import { getFirestoreDb, MENU_ITEMS_COLLECTION } from '../lib/firebase';
 
-// Fetch all menu items from Firestore
-export const fetchMenuItems = async () => {
+// Fetch all menu items from Firestore, optionally filtered by restaurant
+export const fetchMenuItems = async (restaurantId = null) => {
   try {
     const db = getFirestoreDb();
-    const snapshot = await db.collection(MENU_ITEMS_COLLECTION).get();
+    let query = db.collection(MENU_ITEMS_COLLECTION);
+    
+    // Filter by restaurant ID if provided
+    if (restaurantId) {
+      query = query.where('restaurantId', '==', restaurantId);
+    }
+    
+    const snapshot = await query.get();
     
     const items = [];
     snapshot.forEach(doc => {
@@ -107,6 +114,11 @@ export const getMenuItem = async (id) => {
 // Format item data for Firestore storage
 const formatItemForFirestore = (item) => {
   const formatted = { ...item };
+  
+  // Ensure restaurantId is present
+  if (!formatted.restaurantId) {
+    throw new Error('restaurantId is required for menu items');
+  }
   
   // Ensure price is a number
   if (formatted.price) {
