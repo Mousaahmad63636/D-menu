@@ -1,8 +1,7 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]';
-import { fetchSheetData, addMenuItem } from '../../../services/googleSheetsService';
+import { fetchMenuItems, addMenuItem } from '../../../services/firestoreService';
 import { fetchCsvData, addCsvMenuItem } from '../../../services/csvService';
-import { fetchMemoryData, addMemoryMenuItem } from '../../../services/memoryStoreService';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
@@ -14,18 +13,13 @@ export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
       try {
-        // Try Google Sheets first, then CSV, finally memory store
+        // Try Firestore first, fallback to CSV
         let items;
         try {
-          items = await fetchSheetData();
-        } catch (sheetsError) {
-          console.log('Google Sheets failed, trying CSV fallback:', sheetsError.message);
-          try {
-            items = await fetchCsvData();
-          } catch (csvError) {
-            console.log('CSV failed, using memory store:', csvError.message);
-            items = await fetchMemoryData();
-          }
+          items = await fetchMenuItems();
+        } catch (firestoreError) {
+          console.log('Firestore failed, using CSV fallback:', firestoreError.message);
+          items = await fetchCsvData();
         }
         res.status(200).json(items);
       } catch (error) {
@@ -36,18 +30,13 @@ export default async function handler(req, res) {
       
     case 'POST':
       try {
-        // Try Google Sheets first, then CSV, finally memory store
+        // Try Firestore first, fallback to CSV
         let result;
         try {
           result = await addMenuItem(req.body);
-        } catch (sheetsError) {
-          console.log('Google Sheets failed, trying CSV fallback:', sheetsError.message);
-          try {
-            result = await addCsvMenuItem(req.body);
-          } catch (csvError) {
-            console.log('CSV failed, using memory store:', csvError.message);
-            result = await addMemoryMenuItem(req.body);
-          }
+        } catch (firestoreError) {
+          console.log('Firestore failed, using CSV fallback:', firestoreError.message);
+          result = await addCsvMenuItem(req.body);
         }
         res.status(201).json({ success: true, ...result });
       } catch (error) {

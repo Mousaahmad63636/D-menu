@@ -3,7 +3,6 @@ import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import Head from 'next/head';
 import AuthGuard from './AuthGuard';
-import DemoNotification from './DemoNotification';
 
 export default function AdminLayout({ children, title }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -95,7 +94,6 @@ export default function AdminLayout({ children, title }) {
         
         <main>
           <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <DemoNotification />
             {children}
           </div>
         </main>

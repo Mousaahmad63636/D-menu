@@ -148,6 +148,12 @@ services/
 - High contrast ratios
 - Focus management
 
+### Data Integration
+- Firebase Firestore backend
+- Real-time data synchronization
+- Secure admin authentication
+- CSV fallback support
+
 ### Browser Compatibility
 - Modern browsers (Chrome, Firefox, Safari, Edge)
 - Mobile browsers (iOS Safari, Chrome Mobile)
@@ -164,9 +170,10 @@ npm run lint       # Run ESLint
 ```
 
 ### Data Management
-- Static data in `data/menuData.js`
-- CSV import capability via Google Sheets
-- Flexible data structure for easy updates
+- Firebase Firestore for real-time data storage
+- CSV import capability (fallback)
+- Admin dashboard for menu management
+- Real-time synchronization across devices
 
 ## 📊 Menu Data Structure
 
