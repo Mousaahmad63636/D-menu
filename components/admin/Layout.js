@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { signOut, useSession } from 'next-auth/react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useAuth } from '../../contexts/AuthContext';
+import AuthGuard from '../AuthGuard';
 
 export default function AdminLayout({ children }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const { data: session } = useSession();
+  const { user, signOut } = useAuth();
   const router = useRouter();
 
   const navLinks = [
@@ -19,12 +20,15 @@ export default function AdminLayout({ children }) {
   };
 
   const handleSignOut = async () => {
-    await signOut({ redirect: false });
-    router.push('/login');
+    const result = await signOut();
+    if (result.success) {
+      router.push('/admin/firebase-login');
+    }
   };
 
   return (
-    <div className="min-h-screen bg-menu-gray-100">
+    <AuthGuard>
+      <div className="min-h-screen bg-menu-gray-100">
       {/* Mobile Navigation Toggle */}
       <div className="lg:hidden p-4 bg-white border-b border-menu-gray-200">
         <button
@@ -67,7 +71,7 @@ export default function AdminLayout({ children }) {
             <div className="p-4 border-b border-menu-gray-200">
               <h1 className="text-xl font-bold text-menu-gray-900">Menu Admin</h1>
               <p className="text-sm text-menu-gray-600 mt-1">
-                {session?.user?.name || 'Admin User'}
+                {user?.email || 'Admin User'}
               </p>
             </div>
 
@@ -117,5 +121,6 @@ export default function AdminLayout({ children }) {
         </main>
       </div>
     </div>
+    </AuthGuard>
   );
 }

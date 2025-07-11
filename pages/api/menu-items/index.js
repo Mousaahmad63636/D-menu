@@ -1,5 +1,3 @@
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../auth/[...nextauth]';
 import { fetchMenuItems, addMenuItem } from '../../../services/firestoreService';
 
 export default async function handler(req, res) {
@@ -16,13 +14,7 @@ export default async function handler(req, res) {
       break;
       
     case 'POST':
-      // Require authentication for modifications
-      const session = await getServerSession(req, res, authOptions);
-      
-      if (!session) {
-        return res.status(401).json({ error: 'Unauthorized' });
-      }
-      
+      // TODO: Add Firebase authentication verification here
       try {
         const result = await addMenuItem(req.body);
         res.status(201).json({ success: true, ...result });

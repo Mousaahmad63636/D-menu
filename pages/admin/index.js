@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { getSession } from 'next-auth/react';
 import AdminLayout from '../../components/admin/Layout';
 
 export default function AdminDashboard() {

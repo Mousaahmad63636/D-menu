@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-export default function LoginPage() {
+export default function Login() {
   const router = useRouter();
 
   useEffect(() => {
