@@ -1,12 +1,9 @@
-import Papa from 'papaparse';
 import { menuData } from '../data/menuData';
 
-const GOOGLE_SHEETS_URL = "https://docs.google.com/spreadsheets/d/1SJ0ooxxlc74FsvBlSoStuDus0nh4MEDeLpvtYQAf6Iw/export?format=csv&gid=0";
-
-// Transform CSV data to hierarchical menu structure
-const transformMenuData = (csvData) => {
+// Transform API data to hierarchical menu structure
+const transformMenuData = (apiItems) => {
   // Group items by category
-  const categorizedItems = csvData.reduce((acc, item) => {
+  const categorizedItems = apiItems.reduce((acc, item) => {
     const category = item.category || 'Other';
     if (!acc[category]) {
       acc[category] = [];
@@ -14,18 +11,18 @@ const transformMenuData = (csvData) => {
     
     // Transform item to match expected structure
     acc[category].push({
-      id: item.name?.toLowerCase().replace(/\s+/g, '-') || 'unknown',
+      id: item.id,
       name: item.name || 'Unknown Item',
       description: item.description || '',
       description2: item.description2 || '',
       price: item.price ? parseFloat(item.price).toFixed(2) : '0.00',
       image: item.image || 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop',
-      allergens: item.allergens ? item.allergens.split(';').filter(a => a && a !== 'none') : [],
+      allergens: Array.isArray(item.allergens) ? item.allergens : [],
       dietary: [],
-      isVegetarian: item.isvegetarian === 'yes',
-      prepTime: item.preptime || '',
-      popular: item.popular === 'yes',
-      ageRestricted: item.agerestricted === 'yes'
+      isVegetarian: Boolean(item.isVegetarian),
+      prepTime: item.prepTime || '',
+      popular: Boolean(item.popular),
+      ageRestricted: Boolean(item.ageRestricted)
     });
     
     return acc;
@@ -63,7 +60,7 @@ const transformMenuData = (csvData) => {
     }
   ];
 
-  // Populate subcategories based on CSV data
+  // Populate subcategories based on API data
   Object.keys(categorizedItems).forEach(categoryName => {
     const subcategory = {
       id: categoryName.toLowerCase().replace(/\s+/g, '-'),
@@ -101,50 +98,28 @@ const transformMenuData = (csvData) => {
   };
 };
 
-export const fetchMenuData = async (useStaticData = true) => {
-  // Option to use static data instead of CSV
+export const fetchMenuData = async (useStaticData = false) => {
+  // Option to use static data instead of API
   if (useStaticData) {
     return new Promise((resolve) => {
-      // Simulate async behavior
       setTimeout(() => {
         resolve(menuData);
       }, 100);
     });
   }
 
-  // Original CSV fetching logic
+  // Fetch from API (which uses Firestore on server-side)
   try {
-    const response = await fetch(GOOGLE_SHEETS_URL);
-    
+    const response = await fetch('/api/menu-items');
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`API error: ${response.status}`);
     }
-    
-    const csvText = await response.text();
-    
-    return new Promise((resolve, reject) => {
-      Papa.parse(csvText, {
-        header: true,
-        skipEmptyLines: true,
-        transformHeader: (header) => header.toLowerCase().trim(),
-        complete: (results) => {
-          if (results.errors.length > 0) {
-            console.warn('CSV parsing warnings:', results.errors);
-          }
-          
-          try {
-            const menuData = transformMenuData(results.data);
-            resolve(menuData);
-          } catch (error) {
-            reject(new Error(`Failed to transform menu data: ${error.message}`));
-          }
-        },
-        error: (error) => {
-          reject(new Error(`CSV parsing failed: ${error.message}`));
-        }
-      });
-    });
+    const apiItems = await response.json();
+    const transformedData = transformMenuData(apiItems);
+    return transformedData;
   } catch (error) {
-    throw new Error(`Failed to fetch menu data: ${error.message}`);
+    // Fallback to static data if API fails
+    console.warn('API failed, using static data:', error.message);
+    return menuData;
   }
 };

@@ -1,26 +1,13 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]';
 import { fetchMenuItems, addMenuItem } from '../../../services/firestoreService';
-import { fetchCsvData, addCsvMenuItem } from '../../../services/csvService';
 
 export default async function handler(req, res) {
-  const session = await getServerSession(req, res, authOptions);
-  
-  if (!session) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-  
   switch (req.method) {
     case 'GET':
+      // Public access for menu viewing
       try {
-        // Try Firestore first, fallback to CSV
-        let items;
-        try {
-          items = await fetchMenuItems();
-        } catch (firestoreError) {
-          console.log('Firestore failed, using CSV fallback:', firestoreError.message);
-          items = await fetchCsvData();
-        }
+        const items = await fetchMenuItems();
         res.status(200).json(items);
       } catch (error) {
         console.error('API error:', error);
@@ -29,15 +16,15 @@ export default async function handler(req, res) {
       break;
       
     case 'POST':
+      // Require authentication for modifications
+      const session = await getServerSession(req, res, authOptions);
+      
+      if (!session) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+      
       try {
-        // Try Firestore first, fallback to CSV
-        let result;
-        try {
-          result = await addMenuItem(req.body);
-        } catch (firestoreError) {
-          console.log('Firestore failed, using CSV fallback:', firestoreError.message);
-          result = await addCsvMenuItem(req.body);
-        }
+        const result = await addMenuItem(req.body);
         res.status(201).json({ success: true, ...result });
       } catch (error) {
         console.error('API error:', error);

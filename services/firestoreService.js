@@ -35,11 +35,11 @@ export const addMenuItem = async (item) => {
     // Format item data
     const formattedItem = formatItemForFirestore(item);
     
-    // Add to Firestore
-    const docRef = await db.collection(MENU_ITEMS_COLLECTION).add(formattedItem);
+    // Use the formatted ID as the document ID
+    await db.collection(MENU_ITEMS_COLLECTION).doc(item.id).set(formattedItem);
     
     return { 
-      id: docRef.id,
+      id: item.id,
       ...formattedItem
     };
   } catch (error) {
@@ -132,4 +132,56 @@ const formatItemForFirestore = (item) => {
   }
   
   return formatted;
+};
+
+// Migration function to fix existing items with auto-generated IDs
+export const migrateMenuItems = async () => {
+  try {
+    const db = getFirestoreDb();
+    const snapshot = await db.collection(MENU_ITEMS_COLLECTION).get();
+    
+    const migrations = [];
+    
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      const firestoreId = doc.id;
+      
+      // Check if this looks like an auto-generated ID (long random string)
+      if (firestoreId.length > 10 && !firestoreId.includes('-')) {
+        // Generate proper name-based ID
+        const nameBasedId = data.name?.toLowerCase().replace(/\s+/g, '-') || `item-${Date.now()}`;
+        
+        migrations.push({
+          oldId: firestoreId,
+          newId: nameBasedId,
+          data: data
+        });
+      }
+    });
+    
+    console.log(`Found ${migrations.length} items to migrate`);
+    
+    // Perform migrations
+    for (const migration of migrations) {
+      // Create new document with name-based ID
+      await db.collection(MENU_ITEMS_COLLECTION).doc(migration.newId).set({
+        ...migration.data,
+        id: migration.newId
+      });
+      
+      // Delete old document
+      await db.collection(MENU_ITEMS_COLLECTION).doc(migration.oldId).delete();
+      
+      console.log(`Migrated ${migration.data.name}: ${migration.oldId} → ${migration.newId}`);
+    }
+    
+    return { 
+      success: true, 
+      migratedCount: migrations.length,
+      migrations: migrations.map(m => ({ name: m.data.name, oldId: m.oldId, newId: m.newId }))
+    };
+  } catch (error) {
+    console.error('Error migrating menu items:', error);
+    throw new Error('Failed to migrate menu items');
+  }
 };
