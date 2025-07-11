@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ImageUpload from '../ImageUpload';
 
 export default function MenuItemForm({ initialData, onSubmit, isSubmitting }) {
   const [formData, setFormData] = useState({
@@ -120,17 +121,10 @@ export default function MenuItemForm({ initialData, onSubmit, isSubmitting }) {
         </div>
 
         <div>
-          <label htmlFor="image" className="block text-sm font-medium text-menu-gray-700">
-            Image URL
-          </label>
-          <input
-            type="text"
-            id="image"
-            name="image"
+          <ImageUpload 
             value={formData.image}
-            onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-menu-gray-300 focus:border-menu-accent-500 focus:ring-menu-accent-500 shadow-sm sm:text-sm"
-            placeholder="https://example.com/image.jpg"
+            onChange={(value) => setFormData(prev => ({ ...prev, image: value }))}
+            label="Menu Item Image"
           />
         </div>
       </div>
