@@ -1,20 +1,18 @@
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function AuthGuard({ children }) {
-  const { data: session, status } = useSession();
+  const { user, loading } = useAuth();
   const router = useRouter();
-  const isLoading = status === 'loading';
-  const isUnauthenticated = status === 'unauthenticated';
 
   useEffect(() => {
-    if (!isLoading && isUnauthenticated) {
-      router.push('/admin/login');
+    if (!loading && !user) {
+      router.push('/admin/firebase-login');
     }
-  }, [isLoading, isUnauthenticated, router]);
+  }, [loading, user, router]);
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-menu-accent-500"></div>
@@ -22,7 +20,7 @@ export default function AuthGuard({ children }) {
     );
   }
 
-  if (!session) {
+  if (!user) {
     return null;
   }
 

@@ -1,11 +1,21 @@
 import { useState } from 'react';
-import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import AuthGuard from './AuthGuard';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function AdminLayout({ children, title }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { signOut } = useAuth();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    const result = await signOut();
+    if (result.success) {
+      router.push('/admin/firebase-login');
+    }
+  };
 
   return (
     <AuthGuard>
@@ -37,7 +47,7 @@ export default function AdminLayout({ children, title }) {
               </div>
               <div className="hidden md:block">
                 <button
-                  onClick={() => signOut({ callbackUrl: '/admin/login' })}
+                  onClick={handleSignOut}
                   className="text-white hover:bg-menu-accent-500 px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Sign Out
@@ -76,7 +86,7 @@ export default function AdminLayout({ children, title }) {
                     Add New Item
                 </Link>
                 <button
-                  onClick={() => signOut({ callbackUrl: '/admin/login' })}
+                  onClick={handleSignOut}
                   className="text-white hover:bg-menu-accent-500 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
                 >
                   Sign Out
