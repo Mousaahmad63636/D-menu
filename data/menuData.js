@@ -120,6 +120,30 @@ export const menuData = {
               dietary: ["vegan", "gluten-free"]
             }
           ]
+        },
+        {
+          id: "salads",
+          name: "Salads",
+          description: "Fresh, crisp salads with premium ingredients",
+          items: [
+            {
+              id: "caesar-salad",
+              name: "Classic Caesar Salad",
+              description: "Crisp romaine lettuce, parmesan cheese, croutons, and house-made Caesar dressing",
+              price: "14.95",
+              image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"],
+              popular: true
+            },
+            {
+              id: "greek-salad",
+              name: "Mediterranean Greek Salad",
+              description: "Mixed greens, olives, feta cheese, tomatoes, cucumbers, and olive oil dressing",
+              price: "13.95",
+              image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian", "gluten-free"]
+            }
+          ]
         }
       ]
     },
