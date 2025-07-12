@@ -1,8 +1,26 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ImageUpload from './ImageUpload';
+import { menuData } from '../data/menuData';
 
 export default function ItemForm({ initialData, onSubmit, isSubmitting, isEditing = false }) {
+  // Get all categories and subcategories for dropdown
+  const getCategoryOptions = () => {
+    const options = [];
+    menuData.mainCategories.forEach(mainCat => {
+      mainCat.subcategories.forEach(subCat => {
+        options.push({
+          value: `${mainCat.id}-${subCat.id}`,
+          label: `${mainCat.name} > ${subCat.name}`,
+          mainCategory: mainCat.id,
+          subCategory: subCat.id
+        });
+      });
+    });
+    return options;
+  };
+
+  const categoryOptions = getCategoryOptions();
   const [formData, setFormData] = useState({
     name: '',
     category: '',
@@ -80,18 +98,11 @@ export default function ItemForm({ initialData, onSubmit, isSubmitting, isEditin
               className="mt-1 block w-full bg-white border border-menu-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-menu-accent-500 focus:border-menu-accent-500 sm:text-sm"
             >
               <option value="">Select a category</option>
-              <option value="Appetizers">Appetizers</option>
-              <option value="Main Dishes">Main Dishes</option>
-              <option value="Sides">Sides</option>
-              <option value="Salads">Salads</option>
-              <option value="Soups">Soups</option>
-              <option value="Desserts">Desserts</option>
-              <option value="Drinks">Drinks</option>
-              <option value="Cocktails">Cocktails</option>
-              <option value="Wine">Wine</option>
-              <option value="Beer">Beer</option>
-              <option value="Coffee">Coffee</option>
-              <option value="Tea">Tea</option>
+              {categoryOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
           </div>
 
