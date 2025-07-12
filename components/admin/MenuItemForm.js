@@ -1,7 +1,25 @@
 import { useState } from 'react';
 import ImageUpload from '../ImageUpload';
+import { menuData } from '../../data/menuData';
 
 export default function MenuItemForm({ initialData, onSubmit, isSubmitting }) {
+  // Get all categories and subcategories for dropdown
+  const getCategoryOptions = () => {
+    const options = [];
+    menuData.mainCategories.forEach(mainCat => {
+      mainCat.subcategories.forEach(subCat => {
+        options.push({
+          value: `${mainCat.id}-${subCat.id}`,
+          label: `${mainCat.name} > ${subCat.name}`,
+          mainCategory: mainCat.id,
+          subCategory: subCat.id
+        });
+      });
+    });
+    return options;
+  };
+
+  const categoryOptions = getCategoryOptions();
   const [formData, setFormData] = useState({
     name: initialData?.name || '',
     description: initialData?.description || '',
@@ -89,8 +107,7 @@ export default function MenuItemForm({ initialData, onSubmit, isSubmitting }) {
           <label htmlFor="category" className="block text-sm font-medium text-menu-gray-700">
             Category*
           </label>
-          <input
-            type="text"
+          <select
             id="category"
             name="category"
             value={formData.category}
@@ -98,7 +115,14 @@ export default function MenuItemForm({ initialData, onSubmit, isSubmitting }) {
             className={`mt-1 block w-full rounded-md ${
               errors.category ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-menu-gray-300 focus:border-menu-accent-500 focus:ring-menu-accent-500'
             } shadow-sm sm:text-sm`}
-          />
+          >
+            <option value="">Select a category...</option>
+            {categoryOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
           {errors.category && <p className="mt-1 text-sm text-red-600">{errors.category}</p>}
         </div>
 
