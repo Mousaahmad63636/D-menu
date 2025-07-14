@@ -57,7 +57,7 @@ const SubcategorySlider = ({ subcategories, activeSubcategory, onSubcategoryChan
   }
 
   return (
-    <nav className="bg-white sticky top-0 z-10 shadow-sm border-b border-menu-gray-200">
+    <nav className="bg-white sticky top-20 z-10 shadow-sm border-b border-menu-gray-200">
       <div className="relative px-4 py-3">
         {/* Left Arrow */}
         {canScrollLeft && (
