@@ -69,7 +69,7 @@ const MainCategoryNav = ({ mainCategories, activeMainCategory, onMainCategoryCha
   };
 
   return (
-    <nav className="bg-white shadow-lg border-b border-gray-200">
+    <nav className="bg-white sticky top-0 z-20 shadow-lg border-b border-gray-200">
       <div className="px-3 py-4">
         <div className="flex justify-center items-center space-x-3 overflow-x-auto scrollbar-hide">
           {mainCategories.map((category) => {
