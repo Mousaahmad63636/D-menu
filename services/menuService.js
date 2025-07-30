@@ -52,10 +52,10 @@ const transformMenuData = (apiItems) => {
       subcategories: []
     },
     {
-      id: "tobacco",
-      name: "Tobacco",
-      description: "Premium tobacco products",
-      icon: "🚬",
+      id: "burgers",
+      name: "Burgers",
+      description: "Gourmet burgers with premium ingredients and artisan buns",
+      icon: "🍔",
       subcategories: []
     }
   ];
@@ -77,8 +77,8 @@ const transformMenuData = (apiItems) => {
       mainCategories[1].subcategories.push(subcategory); // Beverages
     } else if (lowerCategoryName.includes('pasta') || lowerCategoryName.includes('spaghetti') || lowerCategoryName.includes('penne') || lowerCategoryName.includes('ravioli')) {
       mainCategories[2].subcategories.push(subcategory); // Pasta
-    } else if (lowerCategoryName.includes('tobacco') || lowerCategoryName.includes('cigarette') || lowerCategoryName.includes('cigar') || lowerCategoryName.includes('smoke')) {
-      mainCategories[3].subcategories.push(subcategory); // Tobacco
+    } else if (lowerCategoryName.includes('burger') || lowerCategoryName.includes('classic') || lowerCategoryName.includes('gourmet') || lowerCategoryName.includes('chicken') || lowerCategoryName.includes('veggie')) {
+      mainCategories[3].subcategories.push(subcategory); // Burgers
     } else {
       // Default to pizza if uncertain
       mainCategories[0].subcategories.push(subcategory);

@@ -329,63 +329,117 @@ export const menuData = {
       ]
     },
     {
-      id: "tobacco",
-      name: "Tobacco",
-      description: "Premium tobacco products",
+      id: "burgers",
+      name: "Burgers",
+      description: "Gourmet burgers with premium ingredients and artisan buns",
       subcategories: [
         {
-          id: "cigarettes",
-          name: "Cigarettes",
-          description: "Premium cigarette brands",
+          id: "classic-burgers",
+          name: "Classic Burgers",
+          description: "Traditional favorites with a gourmet twist",
           items: [
             {
-              id: "marlboro",
-              name: "Marlboro Gold",
-              description: "Premium light cigarettes",
-              price: "12.50",
-              image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop&crop=center",
+              id: "classic-cheeseburger",
+              name: "Classic Cheeseburger",
+              description: "Angus beef patty with aged cheddar, lettuce, tomato, onion, and house sauce",
+              price: "16.95",
+              image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop&crop=center",
               dietary: [],
-              ageRestricted: true
+              popular: true
             },
             {
-              id: "camel",
-              name: "Camel Blue",
-              description: "Smooth and mild cigarettes",
-              price: "11.95",
-              image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop&crop=center",
-              dietary: [],
-              ageRestricted: true
-            }
-          ]
-        },
-        {
-          id: "cigars",
-          name: "Premium Cigars",
-          description: "Hand-rolled premium cigars",
-          items: [
-            {
-              id: "cuban",
-              name: "Cuban Romeo y Julieta",
-              description: "Premium hand-rolled Cuban cigar",
-              price: "25.00",
-              image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop&crop=center",
-              dietary: [],
-              ageRestricted: true
-            }
-          ]
-        },
-        {
-          id: "accessories",
-          name: "Smoking Accessories",
-          description: "Quality smoking accessories",
-          items: [
-            {
-              id: "lighter",
-              name: "Premium Lighter",
-              description: "High-quality butane lighter",
-              price: "15.00",
-              image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop&crop=center",
+              id: "bacon-burger",
+              name: "Bacon Cheeseburger",
+              description: "Classic cheeseburger topped with crispy bacon and smoky BBQ sauce",
+              price: "18.95",
+              image: "https://images.unsplash.com/photo-1553979459-d2229ba7433a?w=400&h=300&fit=crop&crop=center",
               dietary: []
+            },
+            {
+              id: "mushroom-swiss",
+              name: "Mushroom Swiss Burger",
+              description: "Beef patty with sautéed mushrooms, Swiss cheese, and garlic aioli",
+              price: "17.95",
+              image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            }
+          ]
+        },
+        {
+          id: "gourmet-burgers",
+          name: "Gourmet Burgers",
+          description: "Premium burgers with unique flavor combinations",
+          items: [
+            {
+              id: "truffle-burger",
+              name: "Truffle Mushroom Burger",
+              description: "Wagyu beef with truffle mushrooms, gruyere cheese, and arugula",
+              price: "28.95",
+              image: "https://images.unsplash.com/photo-1572448862527-d3c904757de6?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            },
+            {
+              id: "blue-cheese-burger",
+              name: "Blue Cheese & Caramelized Onion",
+              description: "Premium beef with blue cheese crumbles, caramelized onions, and fig jam",
+              price: "24.95",
+              image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            },
+            {
+              id: "brie-burger",
+              name: "Brie & Prosciutto Burger",
+              description: "Angus beef with melted brie, prosciutto, spinach, and sun-dried tomato aioli",
+              price: "26.95",
+              image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            }
+          ]
+        },
+        {
+          id: "chicken-burgers",
+          name: "Chicken Burgers",
+          description: "Juicy chicken burgers with creative toppings",
+          items: [
+            {
+              id: "crispy-chicken-burger",
+              name: "Crispy Chicken Burger",
+              description: "Buttermilk fried chicken breast with coleslaw, pickle, and spicy mayo",
+              price: "17.95",
+              image: "https://images.unsplash.com/photo-1606755962773-d324e2d53352?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            },
+            {
+              id: "buffalo-chicken-burger",
+              name: "Buffalo Chicken Burger",
+              description: "Grilled chicken with buffalo sauce, blue cheese, celery, and ranch",
+              price: "18.95",
+              image: "https://images.unsplash.com/photo-1571091655789-405eb7a3a3a8?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            }
+          ]
+        },
+        {
+          id: "veggie-burgers",
+          name: "Veggie & Vegan Burgers",
+          description: "Plant-based options that don't compromise on flavor",
+          items: [
+            {
+              id: "beyond-burger",
+              name: "Beyond Meat Burger",
+              description: "Plant-based patty with vegan cheese, avocado, and herb aioli",
+              price: "19.95",
+              image: "https://images.unsplash.com/photo-1525059696034-4967a729002e?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegan"],
+              popular: true
+            },
+            {
+              id: "portobello-burger",
+              name: "Portobello Mushroom Burger",
+              description: "Grilled portobello cap with roasted peppers, goat cheese, and balsamic glaze",
+              price: "16.95",
+              image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"]
             }
           ]
         }

@@ -23,9 +23,9 @@ const MainCategoryNav = ({ mainCategories, activeMainCategory, onMainCategoryCha
         active: 'bg-pink-500 text-white border-pink-500',
         inactive: 'bg-white text-pink-600 border-pink-200 hover:bg-pink-50 hover:border-pink-300'
       },
-      'tobacco': {
-        active: 'bg-gray-600 text-white border-gray-600',
-        inactive: 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
+      'burgers': {
+        active: 'bg-red-500 text-white border-red-500',
+        inactive: 'bg-white text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300'
       }
     };
     return colorMap[categoryId] || colorMap['pizza'];
@@ -55,11 +55,11 @@ const MainCategoryNav = ({ mainCategories, activeMainCategory, onMainCategoryCha
           <path strokeLinecap="round" strokeLinejoin="round" d="M8 6v12M16 6v12" />
         </svg>
       ),
-      'tobacco': (
-        // Professional cigar icon
+      'burgers': (
+        // Burger icon
         <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20M6 8h12a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4a2 2 0 012-2z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M18 8v8M21 10v4" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 12h16M4 8h16a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2a2 2 0 012-2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h12M8 16h8" />
         </svg>
       )
     };

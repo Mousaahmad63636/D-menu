@@ -27,6 +27,26 @@ const CategoryCards = ({ categories, activeCategory, onCategoryChange }) => {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16v2H4zM6 10h12v8H6z" />
       </svg>
     ),
+    'classic-burgers': (
+      <svg className="w-6 h-6 text-menu-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 12h16M4 8h16a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2a2 2 0 012-2z" />
+      </svg>
+    ),
+    'gourmet-burgers': (
+      <svg className="w-6 h-6 text-menu-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 2l1.5 3h3l-2.5 2 1 3-3-2-3 2 1-3-2.5-2h3L12 2z" />
+      </svg>
+    ),
+    'chicken-burgers': (
+      <svg className="w-6 h-6 text-menu-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+      </svg>
+    ),
+    'veggie-burgers': (
+      <svg className="w-6 h-6 text-menu-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+      </svg>
+    ),
     beverages: (
       <svg className="w-6 h-6 text-menu-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 11l4-4m0 0l4 4m-4-4v12" />
