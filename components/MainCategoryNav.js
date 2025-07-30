@@ -11,7 +11,7 @@ const MainCategoryNav = ({ mainCategories, activeMainCategory, onMainCategoryCha
   // Define unique colors for each main category button (not background)
   const getCategoryColors = (categoryId) => {
     const colorMap = {
-      'food': {
+      'pizza': {
         active: 'bg-orange-500 text-white border-orange-500',
         inactive: 'bg-white text-orange-600 border-orange-200 hover:bg-orange-50 hover:border-orange-300'
       },
@@ -19,7 +19,7 @@ const MainCategoryNav = ({ mainCategories, activeMainCategory, onMainCategoryCha
         active: 'bg-blue-500 text-white border-blue-500',
         inactive: 'bg-white text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300'
       },
-      'desserts': {
+      'pasta': {
         active: 'bg-pink-500 text-white border-pink-500',
         inactive: 'bg-white text-pink-600 border-pink-200 hover:bg-pink-50 hover:border-pink-300'
       },
@@ -28,18 +28,17 @@ const MainCategoryNav = ({ mainCategories, activeMainCategory, onMainCategoryCha
         inactive: 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'
       }
     };
-    return colorMap[categoryId] || colorMap['food'];
+    return colorMap[categoryId] || colorMap['pizza'];
   };
 
   // Professional SVG icons for each category
   const getCategoryIcon = (categoryId, className) => {
     const iconMap = {
-      'food': (
-        // Chef's hat icon
+      'pizza': (
+        // Pizza slice icon
         <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18h12V8.5a2.5 2.5 0 00-2.5-2.5h-7A2.5 2.5 0 006 8.5V18z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18h12l1 2H5l1-2zM8 12h8M9 15h6" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8 6c0-1.1.9-2 2-2s2 .9 2 2M12 6c0-1.1.9-2 2-2s2 .9 2 2M14 6c0-1.1.9-2 2-2s2 .9 2 2" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 2l10 20-10-5-10 5L12 2z" />
         </svg>
       ),
       'beverages': (
@@ -49,12 +48,11 @@ const MainCategoryNav = ({ mainCategories, activeMainCategory, onMainCategoryCha
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V2M9 2h6" />
         </svg>
       ),
-      'desserts': (
-        // Layered cake icon
+      'pasta': (
+        // Pasta/noodles icon
         <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M20 13v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l1.5 3h3l-2.5 2 1 3-3-2-3 2 1-3-2.5-2h3L12 3z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h18M3 6h18M3 18h18" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 6v12M16 6v12" />
         </svg>
       ),
       'tobacco': (
@@ -65,7 +63,7 @@ const MainCategoryNav = ({ mainCategories, activeMainCategory, onMainCategoryCha
         </svg>
       )
     };
-    return iconMap[categoryId] || iconMap['food'];
+    return iconMap[categoryId] || iconMap['pizza'];
   };
 
   return (

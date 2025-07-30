@@ -6,142 +6,142 @@ export const menuData = {
   },
   mainCategories: [
     {
-      id: "food",
-      name: "Food",
-      description: "Delicious meals and appetizers",
+      id: "pizza",
+      name: "Pizza",
+      description: "Authentic wood-fired pizzas with fresh ingredients",
       subcategories: [
         {
-          id: "appetizers",
-          name: "Appetizers",
-          description: "Perfect starters to begin your culinary journey",
+          id: "margherita",
+          name: "Margherita Pizzas",
+          description: "Classic Italian pizzas with tomato, mozzarella, and fresh basil",
           items: [
             {
-              id: "bruschetta",
-              name: "Classic Bruschetta",
-              description: "Toasted artisan bread topped with fresh tomatoes, basil, garlic, and extra virgin olive oil",
-              price: "12.95",
-              image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=400&h=300&fit=crop&crop=center",
+              id: "margherita-classic",
+              name: "Classic Margherita",
+              description: "Traditional pizza with San Marzano tomatoes, fresh mozzarella, basil, and extra virgin olive oil",
+              price: "16.95",
+              image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop&crop=center",
               dietary: ["vegetarian"],
               popular: true
             },
             {
-              id: "calamari",
-              name: "Crispy Calamari",
-              description: "Tender squid rings lightly battered and fried, served with marinara sauce and lemon",
-              price: "15.95",
-              image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop&crop=center",
-              dietary: []
-            },
-            {
-              id: "charcuterie",
-              name: "Artisan Charcuterie Board",
-              description: "Selection of cured meats, artisanal cheeses, olives, nuts, and seasonal fruits",
-              price: "24.95",
-              image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop&crop=center",
-              dietary: ["gluten-free-options"]
-            },
-            {
-              id: "soup",
-              name: "Roasted Tomato Basil Soup",
-              description: "Creamy roasted tomato soup with fresh basil, served with artisan bread",
-              price: "9.95",
-              image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop&crop=center",
-              dietary: ["vegetarian"]
-            }
-          ]
-        },
-        {
-          id: "mains",
-          name: "Main Courses",
-          description: "Expertly prepared dishes featuring the finest ingredients",
-          items: [
-            {
-              id: "salmon",
-              name: "Pan-Seared Atlantic Salmon",
-              description: "Fresh salmon fillet with lemon herb butter, served with seasonal vegetables and wild rice",
-              price: "28.95",
-              image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop&crop=center",
-              dietary: ["gluten-free"],
-              popular: true
-            },
-            {
-              id: "ribeye",
-              name: "Prime Ribeye Steak",
-              description: "12oz dry-aged ribeye grilled to perfection, served with garlic mashed potatoes and asparagus",
-              price: "38.95",
-              image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop&crop=center",
-              dietary: ["gluten-free"]
-            },
-            {
-              id: "pasta",
-              name: "Lobster Ravioli",
-              description: "House-made ravioli filled with lobster and ricotta, finished with cream sauce and fresh herbs",
-              price: "26.95",
-              image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&h=300&fit=crop&crop=center",
-              dietary: []
-            },
-            {
-              id: "chicken",
-              name: "Herb-Crusted Chicken",
-              description: "Free-range chicken breast with rosemary and thyme crust, served with roasted vegetables",
-              price: "22.95",
-              image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=400&h=300&fit=crop&crop=center",
-              dietary: ["gluten-free"]
-            },
-            {
-              id: "risotto",
-              name: "Wild Mushroom Risotto",
-              description: "Creamy Arborio rice with seasonal wild mushrooms, parmesan, and truffle oil",
+              id: "margherita-buffalo",
+              name: "Buffalo Margherita",
+              description: "Premium pizza with fresh buffalo mozzarella, Roma tomatoes, and organic basil",
               price: "19.95",
-              image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=400&h=300&fit=crop&crop=center",
-              dietary: ["vegetarian", "gluten-free"]
-            }
-          ]
-        },
-        {
-          id: "sides",
-          name: "Side Dishes",
-          description: "Perfect complements to your main course",
-          items: [
-            {
-              id: "truffle-fries",
-              name: "Truffle Parmesan Fries",
-              description: "Hand-cut fries tossed with truffle oil and parmesan cheese",
-              price: "8.95",
-              image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop&crop=center",
+              image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop&crop=center",
               dietary: ["vegetarian"]
             },
             {
-              id: "roasted-vegetables",
-              name: "Seasonal Roasted Vegetables",
-              description: "Chef's selection of seasonal vegetables roasted with herbs",
-              price: "6.95",
-              image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop&crop=center",
-              dietary: ["vegan", "gluten-free"]
+              id: "margherita-burrata",
+              name: "Burrata Margherita",
+              description: "Gourmet pizza topped with creamy burrata cheese, cherry tomatoes, and fresh arugula",
+              price: "22.95",
+              image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"]
+            },
+            {
+              id: "margherita-pesto",
+              name: "Pesto Margherita",
+              description: "Unique twist with homemade basil pesto, fresh mozzarella, and sun-dried tomatoes",
+              price: "18.95",
+              image: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"]
             }
           ]
         },
         {
-          id: "salads",
-          name: "Salads",
-          description: "Fresh, crisp salads with premium ingredients",
+          id: "specialty",
+          name: "Specialty Pizzas",
+          description: "Chef's signature pizza creations with premium toppings",
           items: [
             {
-              id: "caesar-salad",
-              name: "Classic Caesar Salad",
-              description: "Crisp romaine lettuce, parmesan cheese, croutons, and house-made Caesar dressing",
-              price: "14.95",
-              image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop&crop=center",
-              dietary: ["vegetarian"],
+              id: "pepperoni-supreme",
+              name: "Pepperoni Supreme",
+              description: "Premium pepperoni, Italian sausage, mushrooms, green peppers, and extra mozzarella",
+              price: "24.95",
+              image: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=400&h=300&fit=crop&crop=center",
+              dietary: [],
               popular: true
             },
             {
-              id: "greek-salad",
-              name: "Mediterranean Greek Salad",
-              description: "Mixed greens, olives, feta cheese, tomatoes, cucumbers, and olive oil dressing",
-              price: "13.95",
+              id: "quattro-stagioni",
+              name: "Quattro Stagioni",
+              description: "Four seasons pizza with artichokes, mushrooms, ham, and olives on four quarters",
+              price: "26.95",
+              image: "https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            },
+            {
+              id: "prosciutto-arugula",
+              name: "Prosciutto & Arugula",
+              description: "Thin-crust pizza with prosciutto di Parma, fresh arugula, and shaved Parmesan",
+              price: "28.95",
+              image: "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            },
+            {
+              id: "truffle-mushroom",
+              name: "Truffle Mushroom",
+              description: "Gourmet pizza with mixed wild mushrooms, truffle oil, goat cheese, and fresh thyme",
+              price: "29.95",
+              image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"]
+            },
+            {
+              id: "bbq-chicken",
+              name: "BBQ Chicken",
+              description: "Smoky BBQ sauce, grilled chicken, red onions, cilantro, and mozzarella cheese",
+              price: "23.95",
+              image: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            }
+          ]
+        },
+        {
+          id: "white-pizzas",
+          name: "White Pizzas",
+          description: "No-sauce pizzas with creamy cheese bases and gourmet toppings",
+          items: [
+            {
+              id: "ricotta-spinach",
+              name: "Ricotta & Spinach White",
+              description: "Creamy ricotta base with fresh spinach, garlic, mozzarella, and Parmesan cheese",
+              price: "21.95",
+              image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"]
+            },
+            {
+              id: "three-cheese",
+              name: "Three Cheese White",
+              description: "Blend of mozzarella, Parmesan, and Gorgonzola with caramelized onions and walnuts",
+              price: "23.95",
+              image: "https://images.unsplash.com/photo-1552539618-7eec9b4d1796?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"]
+            }
+          ]
+        },
+        {
+          id: "vegan-pizzas",
+          name: "Vegan Pizzas",
+          description: "Plant-based pizzas with dairy-free cheese and fresh vegetables",
+          items: [
+            {
+              id: "vegan-margherita",
+              name: "Vegan Margherita",
+              description: "Classic pizza with house-made cashew mozzarella, fresh tomatoes, and basil",
+              price: "18.95",
+              image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegan"],
+              popular: true
+            },
+            {
+              id: "mediterranean-vegan",
+              name: "Mediterranean Vegan",
+              description: "Dairy-free cheese with olives, sun-dried tomatoes, artichokes, and fresh herbs",
+              price: "20.95",
               image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop&crop=center",
-              dietary: ["vegetarian", "gluten-free"]
+              dietary: ["vegan"]
             }
           ]
         }
@@ -216,55 +216,115 @@ export const menuData = {
       ]
     },
     {
-      id: "desserts",
-      name: "Desserts",
-      description: "Sweet endings to your dining experience",
+      id: "pasta",
+      name: "Pasta",
+      description: "Handcrafted pasta dishes with authentic Italian flavors",
       subcategories: [
         {
-          id: "cakes",
-          name: "Cakes & Pastries",
-          description: "Decadent cakes and pastries",
+          id: "spaghetti",
+          name: "Spaghetti",
+          description: "Classic long pasta dishes with traditional and modern sauces",
           items: [
             {
-              id: "tiramisu",
-              name: "Classic Tiramisu",
-              description: "Traditional Italian dessert with coffee-soaked ladyfingers, mascarpone, and cocoa",
-              price: "8.95",
-              image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&h=300&fit=crop&crop=center",
-              dietary: ["vegetarian"]
+              id: "spaghetti-carbonara",
+              name: "Spaghetti Carbonara",
+              description: "Traditional Roman pasta with pancetta, eggs, Pecorino Romano, and black pepper",
+              price: "19.95",
+              image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&h=300&fit=crop&crop=center",
+              dietary: [],
+              popular: true
             },
             {
-              id: "cheesecake",
-              name: "New York Cheesecake",
-              description: "Rich and creamy cheesecake with graham cracker crust and berry compote",
-              price: "7.95",
-              image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&h=300&fit=crop&crop=center",
-              dietary: ["vegetarian"]
+              id: "spaghetti-bolognese",
+              name: "Spaghetti Bolognese",
+              description: "Classic meat sauce made with beef, pork, tomatoes, and aromatic vegetables",
+              price: "18.95",
+              image: "https://images.unsplash.com/photo-1572441713132-51c75654db73?w=400&h=300&fit=crop&crop=center",
+              dietary: []
             },
             {
-              id: "chocolate",
-              name: "Dark Chocolate Tart",
-              description: "Decadent dark chocolate tart with salted caramel and vanilla bean ice cream",
-              price: "9.95",
-              image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=300&fit=crop&crop=center",
+              id: "spaghetti-aglio-olio",
+              name: "Spaghetti Aglio e Olio",
+              description: "Simple yet elegant pasta with garlic, olive oil, red chili flakes, and parsley",
+              price: "16.95",
+              image: "https://images.unsplash.com/photo-1563379091339-03246963d96c?w=400&h=300&fit=crop&crop=center",
               dietary: ["vegetarian"]
             }
           ]
         },
         {
-          id: "frozen",
-          name: "Frozen Treats",
-          description: "Cool and creamy frozen desserts",
+          id: "penne",
+          name: "Penne",
+          description: "Tube-shaped pasta perfect for holding rich, flavorful sauces",
           items: [
             {
-              id: "gelato",
-              name: "Artisan Gelato Trio",
-              description: "Three scoops of house-made gelato: vanilla bean, pistachio, and chocolate",
-              price: "6.95",
-              image: "https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?w=400&h=300&fit=crop&crop=center",
-              dietary: ["vegetarian", "gluten-free"]
+              id: "penne-arrabbiata",
+              name: "Penne all'Arrabbiata",
+              description: "Spicy pasta with tomatoes, garlic, red chili peppers, and fresh basil",
+              price: "17.95",
+              image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"]
+            },
+            {
+              id: "penne-puttanesca",
+              name: "Penne Puttanesca",
+              description: "Bold pasta dish with olives, capers, anchovies, tomatoes, and garlic",
+              price: "19.95",
+              image: "https://images.unsplash.com/photo-1565299585323-38174c4a6471?w=400&h=300&fit=crop&crop=center",
+              dietary: []
             }
           ]
+        },
+        {
+          id: "ravioli",
+          name: "Ravioli",
+          description: "House-made stuffed pasta parcels with gourmet fillings",
+          items: [
+            {
+              id: "ravioli-spinach-ricotta",
+              name: "Spinach & Ricotta Ravioli",
+              description: "Fresh pasta filled with spinach and ricotta, served with sage butter sauce",
+              price: "21.95",
+              image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"]
+            },
+            {
+              id: "ravioli-lobster",
+              name: "Lobster Ravioli",
+              description: "Luxurious pasta parcels filled with lobster meat in cream sauce with fresh herbs",
+              price: "28.95",
+              image: "https://images.unsplash.com/photo-1572441713537-9a41739f9fab?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            }
+          ]
+        },
+        {
+          id: "penne",
+          name: "Penne",
+          description: "Tube-shaped pasta perfect for holding rich, flavorful sauces",
+          items: [
+            {
+              id: "penne-arrabbiata",
+              name: "Penne all'Arrabbiata",
+              description: "Spicy pasta with tomatoes, garlic, red chili peppers, and fresh basil",
+              price: "17.95",
+              image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"]
+            },
+            {
+              id: "penne-puttanesca",
+              name: "Penne Puttanesca",
+              description: "Bold pasta dish with olives, capers, anchovies, tomatoes, and garlic",
+              price: "19.95",
+              image: "https://images.unsplash.com/photo-1565299585323-38174c4a6471?w=400&h=300&fit=crop&crop=center",
+              dietary: []
+            }
+          ]
+        },
+        {
+          id: "ravioli",
+          name: "Ravioli",
+          description: "House-made stuffed pasta parcels with gourmet fillings",
         }
       ]
     },

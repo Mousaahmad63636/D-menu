@@ -31,10 +31,10 @@ const transformMenuData = (apiItems) => {
   // Map categories to main categories structure
   const mainCategories = [
     {
-      id: "food",
-      name: "Food",
-      description: "Delicious meals and appetizers",
-      icon: "🍽️",
+      id: "pizza",
+      name: "Pizza",
+      description: "Authentic wood-fired pizzas with fresh ingredients",
+      icon: "🍕",
       subcategories: []
     },
     {
@@ -45,10 +45,10 @@ const transformMenuData = (apiItems) => {
       subcategories: []
     },
     {
-      id: "desserts",
-      name: "Desserts",
-      description: "Sweet endings to your dining experience",
-      icon: "🍰",
+      id: "pasta",
+      name: "Pasta",
+      description: "Handcrafted pasta dishes with authentic Italian flavors",
+      icon: "🍝",
       subcategories: []
     },
     {
@@ -71,16 +71,16 @@ const transformMenuData = (apiItems) => {
 
     // Determine which main category this subcategory belongs to
     const lowerCategoryName = categoryName.toLowerCase();
-    if (lowerCategoryName.includes('appetizer') || lowerCategoryName.includes('main') || lowerCategoryName.includes('side') || lowerCategoryName.includes('soup') || lowerCategoryName.includes('salad')) {
-      mainCategories[0].subcategories.push(subcategory); // Food
+    if (lowerCategoryName.includes('margherita') || lowerCategoryName.includes('specialty') || lowerCategoryName.includes('white') || lowerCategoryName.includes('vegan') || lowerCategoryName.includes('pizza')) {
+      mainCategories[0].subcategories.push(subcategory); // Pizza
     } else if (lowerCategoryName.includes('drink') || lowerCategoryName.includes('beverage') || lowerCategoryName.includes('coffee') || lowerCategoryName.includes('tea') || lowerCategoryName.includes('juice') || lowerCategoryName.includes('wine') || lowerCategoryName.includes('cocktail')) {
       mainCategories[1].subcategories.push(subcategory); // Beverages
-    } else if (lowerCategoryName.includes('dessert') || lowerCategoryName.includes('cake') || lowerCategoryName.includes('ice') || lowerCategoryName.includes('sweet')) {
-      mainCategories[2].subcategories.push(subcategory); // Desserts
+    } else if (lowerCategoryName.includes('pasta') || lowerCategoryName.includes('spaghetti') || lowerCategoryName.includes('penne') || lowerCategoryName.includes('ravioli')) {
+      mainCategories[2].subcategories.push(subcategory); // Pasta
     } else if (lowerCategoryName.includes('tobacco') || lowerCategoryName.includes('cigarette') || lowerCategoryName.includes('cigar') || lowerCategoryName.includes('smoke')) {
       mainCategories[3].subcategories.push(subcategory); // Tobacco
     } else {
-      // Default to food if uncertain
+      // Default to pizza if uncertain
       mainCategories[0].subcategories.push(subcategory);
     }
   });
