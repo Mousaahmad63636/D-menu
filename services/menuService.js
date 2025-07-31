@@ -90,7 +90,7 @@ const transformMenuData = (apiItems) => {
 
   return {
     restaurant: {
-      name: "Bella Vista Restaurant",
+      name: "IL SOGNO Resto",
       description: "Fresh, locally-sourced ingredients crafted into memorable dining experiences",
       location: "Downtown District"
     },
