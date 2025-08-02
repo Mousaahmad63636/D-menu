@@ -450,6 +450,11 @@ export const menuData = {
       name: "Salad",
       description: "Fresh and healthy salads with a variety of dressings",
       subcategories: [
+    {
+      id: "salad",
+      name: "Salad",
+      description: "Fresh and healthy salads with a variety of dressings",
+      subcategories: [
         {
           id: "salads",
           name: "Salads",
@@ -474,6 +479,8 @@ export const menuData = {
             }
           ]
         }
+      ]
+    }
       ]
     }
   ]
