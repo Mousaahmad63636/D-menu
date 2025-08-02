@@ -444,6 +444,37 @@ export const menuData = {
           ]
         }
       ]
+    },
+    {
+      id: "salad",
+      name: "Salad",
+      description: "Fresh and healthy salads with a variety of dressings",
+      subcategories: [
+        {
+          id: "salads",
+          name: "Salads",
+          description: "A selection of fresh and healthy salads",
+          items: [
+            {
+              id: "caesar-salad",
+              name: "Caesar Salad",
+              description: "Classic Caesar salad with romaine lettuce, croutons, Parmesan, and Caesar dressing",
+              price: "12.95",
+              image: "https://images.unsplash.com/photo-1589308078054-8d0a0d6e6c4b?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"],
+              popular: true
+            },
+            {
+              id: "greek-salad",
+              name: "Greek Salad",
+              description: "Traditional Greek salad with tomatoes, cucumbers, olives, feta cheese, and olive oil",
+              price: "14.95",
+              image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop&crop=center",
+              dietary: ["vegetarian"]
+            }
+          ]
+        }
+      ]
     }
   ]
 };
