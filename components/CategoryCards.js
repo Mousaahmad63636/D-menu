@@ -52,6 +52,12 @@ const CategoryCards = ({ categories, activeCategory, onCategoryChange }) => {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 11l4-4m0 0l4 4m-4-4v12" />
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4m6 0h4a2 2 0 012 2v14a2 2 0 01-2 2h-4m-6 0a2 2 0 002 2h2a2 2 0 012 2m-6 0V9a2 2 0 012-2h2a2 2 0 012 2v12" />
       </svg>
+    ),
+    salads: (
+      <svg className="w-6 h-6 text-menu-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 21l8-16 8 16H3z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 21h6" />
+      </svg>
     )
   };
 
