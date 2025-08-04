@@ -297,34 +297,6 @@ export const menuData = {
               dietary: []
             }
           ]
-        },
-        {
-          id: "penne",
-          name: "Penne",
-          description: "Tube-shaped pasta perfect for holding rich, flavorful sauces",
-          items: [
-            {
-              id: "penne-arrabbiata",
-              name: "Penne all'Arrabbiata",
-              description: "Spicy pasta with tomatoes, garlic, red chili peppers, and fresh basil",
-              price: "17.95",
-              image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=300&fit=crop&crop=center",
-              dietary: ["vegetarian"]
-            },
-            {
-              id: "penne-puttanesca",
-              name: "Penne Puttanesca",
-              description: "Bold pasta dish with olives, capers, anchovies, tomatoes, and garlic",
-              price: "19.95",
-              image: "https://images.unsplash.com/photo-1565299585323-38174c4a6471?w=400&h=300&fit=crop&crop=center",
-              dietary: []
-            }
-          ]
-        },
-        {
-          id: "ravioli",
-          name: "Ravioli",
-          description: "House-made stuffed pasta parcels with gourmet fillings",
         }
       ]
     },

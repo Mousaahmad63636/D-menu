@@ -57,6 +57,13 @@ const transformMenuData = (apiItems) => {
       description: "Gourmet burgers with premium ingredients and artisan buns",
       icon: "🍔",
       subcategories: []
+    },
+    {
+      id: "salad",
+      name: "Salad",
+      description: "Fresh and healthy salads with a variety of dressings",
+      icon: "🥗",
+      subcategories: []
     }
   ];
 
@@ -79,6 +86,8 @@ const transformMenuData = (apiItems) => {
       mainCategories[2].subcategories.push(subcategory); // Pasta
     } else if (lowerCategoryName.includes('burger') || lowerCategoryName.includes('classic') || lowerCategoryName.includes('gourmet') || lowerCategoryName.includes('chicken') || lowerCategoryName.includes('veggie')) {
       mainCategories[3].subcategories.push(subcategory); // Burgers
+    } else if (lowerCategoryName.includes('salad') || lowerCategoryName.includes('caesar') || lowerCategoryName.includes('greek')) {
+      mainCategories[4].subcategories.push(subcategory); // Salad
     } else {
       // Default to pizza if uncertain
       mainCategories[0].subcategories.push(subcategory);
